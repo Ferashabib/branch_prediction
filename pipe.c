@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 {
 	printf("I am lazy, letting other program to ls the directory\n\n");
 	printf("I will just wait for their report\n\n");
-	execlp("ls", "ls", "-a", "-l", NULL);
+	execlp(argc[1], argv[1], argv[2][1], argv[2][2], NULL);
 	printf ("They finished; Done! \n");
 	return 0;
 }
