@@ -6,10 +6,9 @@
 
 int main(int argc, char *argv[])
 {
-	printf ("how many args are there: %d\n", argc); 
-	printf ("what are they:\n");
-	for (int i=0;i<argc;i++) {
-		printf ("argv %d is: %s \n", i, argv[i]);
-	}
+	printf("I am lazy, letting other program to ls the directory\n\n");
+	printf("I will just wait for their report\n\n");
+	execlp("ls", "ls", "-a", "-l", NULL);
+	printf ("They finished; Done! \n");
 	return 0;
 }
