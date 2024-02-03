@@ -18,13 +18,21 @@ int main(int argc, char *argv[])
 
 		int ret = fork();
 		if (ret == 0) {//child
-			if (i != argc-1) {//Not the last argument
+			if (i == argc-1) { //If this is the last argument
+				close(fds[0]);
+				close(fds[1]);
 
-				// dup2() performs the same task as dup(), but it specifically redirects fd.
-				//output will go to write end of fds[1] instead of stdout
-				dup2(fds[1], 1);
+				//int execlp(const char *file, const char *arg, ... /*(char*) NULL*/);  
+				execlp(argv[i], argv[i], NULL);
+
+				//printf("Execlp failed!");
+				return (EXIT_FAILURE); //if execlp fails
 			}
-
+			else { //NOT the last argument
+			
+			// dup2() performs the same task as dup(), but it specifically redirects fd.
+			//output will go to write end of fds[1] instead of stdout
+			dup2(fds[1], 1);
 			close(fds[0]);
 			close(fds[1]);
 		      
@@ -33,6 +41,7 @@ int main(int argc, char *argv[])
 
 			//printf("Execlp failed!");
 			return (EXIT_FAILURE); //if execlp fails
+			}
 		}
 
 		else if (ret>0) { //parent
@@ -59,7 +68,7 @@ int main(int argc, char *argv[])
 			}
 
 		}
-		
+
 		else { //error
 
 			//printf("No fork, just spoons");

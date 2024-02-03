@@ -58,4 +58,3 @@ cs111@cs111 Downloads/lab1 (main !%) » ls | wc
 
 make clean
 or manually use rm
-
