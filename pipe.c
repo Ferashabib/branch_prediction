@@ -34,6 +34,7 @@ int main(int argc, char *argv[])
 			//printf("Execlp failed!");
 			return (EXIT_FAILURE); //if execlp fails
 		}
+
 		else if (ret>0) { //parent
 			dup2(fds[0], 0); //redirect stdin to pipe
 
@@ -57,6 +58,7 @@ int main(int argc, char *argv[])
 			}
 
 		}
+		
 		else { //error
 
 			//printf("No fork, just spoons");
