@@ -8,7 +8,7 @@
 int main(int argc, char *argv[])
 {
 	if (argc <= 1) { //Check if there are any arguments
-		fprintf(stderr, "No Arguments");
+		printf("No Arguments");
 		exit(EINVAL);
 	}
 
@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
 		      
 			execlp(argv[i], argv[i], NULL);
 
+			printf("Execlp failed!");
 			return (EXIT_FAILURE); //if execlp fails
 		}
 		else if (ret>0) { //parent
@@ -45,11 +46,13 @@ int main(int argc, char *argv[])
 			int code = WEXITSTATUS(wstatus);
 
 			if (child_st && code) {
+				printf("Oop!");
 				exit(code);
 			}
 
 		}
 		else { //error
+			printf("No fork, just spoons");
 			exit(EXIT_FAILURE);
 		}
 	}
