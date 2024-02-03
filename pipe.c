@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 			int child_st = WIFEXITED(wstatus);
 			int code = WEXITSTATUS(wstatus);
 
-			if (child_st) {
+			if (child_st && code) {
 				exit(code);
 			}
 
