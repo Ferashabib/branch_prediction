@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 			dup2(fds[0], 0);
 
 			close(fds[0]);
-			close(fds[0]);
+			close(fds[1]);
 
 			int wstatus;
 			waitpid(ret, &wstatus, 0);
