@@ -24,8 +24,8 @@ int main(int argc, char *argv[])
 
 			close(fds[0]);
 			close(fds[1]);
-			char* argument = argv[i];
-			execlp(argument, argument, NULL);
+		      
+			execlp(argv[i], argv[i], NULL);
 
 			return (EXIT_FAILURE); //if execlp fails
 		}
