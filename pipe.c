@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 			close(fds[1]);
 			execlp(argv[i], argv[i]);
 
-			return EXIT_FALIURE; //if execlp fails
+			return EXIT_FAILURE; //if execlp fails
 		}
 		else if (ret>0) { //parent
 			dup2(fds[0], 0);
@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 			// WIFEXITED(status): child exited normally 
 			// WEXITSTATUS(status): return code when child exits
 
-			bool child_st = WIFEXITED(wstatus);
+			int child_st = WIFEXITED(wstatus);
 
 			if (child_st) {
 				exit(WEXITSTATUS(wstatus));
