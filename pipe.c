@@ -50,8 +50,9 @@ int main(int argc, char *argv[])
 
 			int child_st = WIFEXITED(wstatus);
 			int code = WEXITSTATUS(wstatus);
+			int key = child_st && code;
 
-			if (child_st && code) {
+			if (key) {
 
 				//printf("Oop!");
 				exit(code);
