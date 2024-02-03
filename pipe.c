@@ -24,9 +24,10 @@ int main(int argc, char *argv[])
 
 			close(fds[0]);
 			close(fds[1]);
-			execlp(argv[i], argv[i]);
+			char* argument = argv[i];
+			execlp(argument, argument, NULL);
 
-			return EXIT_FAILURE; //if execlp fails
+			return (EXIT_FAILURE); //if execlp fails
 		}
 		else if (ret>0) { //parent
 			dup2(fds[0], 0);
@@ -41,11 +42,15 @@ int main(int argc, char *argv[])
 			// WEXITSTATUS(status): return code when child exits
 
 			int child_st = WIFEXITED(wstatus);
+			int code = WEXITSTATUS(wstatus);
 
-			if (child_st) {
-				exit(WEXITSTATUS(wstatus));
+			if (child_st && code) {
+				exit(code);
 			}
 
+		}
+		else { //error
+			exit(EXIT_FAILURE);
 		}
 	}
 	return 0;
