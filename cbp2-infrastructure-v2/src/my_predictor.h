@@ -40,8 +40,8 @@ public:
 		if (b.br_flags & BR_CONDITIONAL) {
 			unsigned int addr2 = (b.address<<22) | (b.address>>10);
 			unsigned int addr3 = (b.address<<12) | (b.address>>20);
-			unsigned int addr4 = b.address ^ 0xFFFFFFFF; //flip all the bits
-			unsigned int addr5 = (addr4<<16) | (addr4>>16);
+			unsigned int addr4 = (b.address>>2);
+			unsigned int addr5 = (b.address<<16) | (b.address>>16);
 			u.index1 = 
 				  (history << (TABLE_BITS - HISTORY_LENGTH)) 
 				^ (b.address & ((1<<TABLE_BITS)-1));
