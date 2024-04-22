@@ -40,7 +40,7 @@ public:
 		if (bi.br_flags & BR_CONDITIONAL) {
 			unsigned char *c = &tab[((my_update*)u)->index];
 			if (taken) {
-				if (*c < 7) (*c)++;
+				if (*c < 3) (*c)++;
 			} else {
 				if (*c > 0) (*c)--;
 			}
