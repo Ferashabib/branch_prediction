@@ -40,9 +40,11 @@ public:
 		if (bi.br_flags & BR_CONDITIONAL) {
 			unsigned char *c = &tab[((my_update*)u)->index];
 			if (taken) {
-				if (*c < 15) (*c)++;
+				if (*c == 1) (*c)=3;
+				else if (*c < 3) (*c)++;
 			} else {
-				if (*c > 0) (*c)--;
+				if (*c == 2) (*c)=0;
+				else if (*c > 0) (*c)--;
 			}
 			history <<= 1;
 			history |= taken;
