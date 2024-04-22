@@ -15,8 +15,8 @@ public:
 
 class my_predictor : public branch_predictor {
 public:
-#define HISTORY_LENGTH	17
-#define TABLE_BITS	30
+#define HISTORY_LENGTH	15
+#define TABLE_BITS	15
 	my_update u;
 	branch_info bi;
 	unsigned int history;
@@ -43,19 +43,19 @@ public:
 			unsigned int addr4 = b.address ^ 0xFFFFFFFF; //flip all the bits
 			unsigned int addr5 = (addr4<<16) | (addr4>>16);
 			u.index1 = 
-				  (history << (3 + TABLE_BITS - HISTORY_LENGTH)) 
+				  (history << (TABLE_BITS - HISTORY_LENGTH)) 
 				^ (b.address & ((1<<TABLE_BITS)-1));
 			u.index2 = 
-				  (history << (3 + TABLE_BITS - HISTORY_LENGTH)) 
+				  (history << (TABLE_BITS - HISTORY_LENGTH)) 
 				^ ((addr2) & ((1<<TABLE_BITS)-1));
 			u.index3 = 
-				  (history << (3 + TABLE_BITS - HISTORY_LENGTH)) 
+				  (history << (TABLE_BITS - HISTORY_LENGTH)) 
 				^ ((addr3) & ((1<<TABLE_BITS)-1));
 			u.index4 = 
-				  (history << (3 + TABLE_BITS - HISTORY_LENGTH)) 
+				  (history << (TABLE_BITS - HISTORY_LENGTH)) 
 				^ ((addr4) & ((1<<TABLE_BITS)-1));
 			u.index5 = 
-				  (history << (3 + TABLE_BITS - HISTORY_LENGTH)) 
+				  (history << (TABLE_BITS - HISTORY_LENGTH)) 
 				^ ((addr5) & ((1<<TABLE_BITS)-1));
 			int FinalIndex = (tab1[u.index1] >> 1) + (tab2[u.index2] >> 1) +(tab3[u.index3] >> 1) + (tab4[u.index4] >> 1) + (tab5[u.index5] >> 1);
 			u.direction_prediction ((FinalIndex > 2) ? 1 : 0);
