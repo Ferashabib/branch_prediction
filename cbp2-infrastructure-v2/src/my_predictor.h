@@ -15,8 +15,8 @@ public:
 
 class my_predictor : public branch_predictor {
 public:
-#define HISTORY_LENGTH	15
-#define TABLE_BITS	15
+#define HISTORY_LENGTH	17
+#define TABLE_BITS	30
 	my_update u;
 	branch_info bi;
 	unsigned int history;
@@ -57,8 +57,8 @@ public:
 			u.index5 = 
 				  (history << (TABLE_BITS - HISTORY_LENGTH)) 
 				^ ((addr5) & ((1<<TABLE_BITS)-1));
-			int FinalIndex = (tab1[u.index1] >> 1) + (tab2[u.index2] >> 1) +(tab3[u.index3] >> 1); //+ (tab4[u.index4] >> 1) + (tab5[u.index5] >> 1);
-			u.direction_prediction ((FinalIndex > 1) ? 1 : 0);
+			int FinalIndex = (tab1[u.index1] >> 1) + (tab2[u.index2] >> 1) +(tab3[u.index3] >> 1) + (tab4[u.index4] >> 1) + (tab5[u.index5] >> 1);
+			u.direction_prediction ((FinalIndex => 3) ? 1 : 0);
 		} else {
 			u.direction_prediction (true);
 		}
