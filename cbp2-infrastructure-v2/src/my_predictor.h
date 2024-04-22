@@ -13,8 +13,8 @@ public:
 
 class my_predictor : public branch_predictor {
 public:
-#define HISTORY_LENGTH	17
-#define TABLE_BITS	30
+#define HISTORY_LENGTH	15
+#define TABLE_BITS	15
 	my_update u;
 	branch_info bi;
 	unsigned int history;
@@ -31,15 +31,17 @@ public:
 	branch_update *predict (branch_info & b) {
 		bi = b;
 		if (b.br_flags & BR_CONDITIONAL) {
+			unsigned int addr2 = (b.address<<22) | (b.address>>10);
+			unsigned int addr3 = (b.address<<12) | (b.address>>20);
 			u.index1 = 
 				  (history << (TABLE_BITS - HISTORY_LENGTH)) 
-				^ (b.address & ((1<<10)-1));
+				^ (b.address & ((1<<TABLE_BITS)-1));
 			u.index2 = 
 				  (history << (TABLE_BITS - HISTORY_LENGTH)) 
-				^ ((b.address>>10) & ((1<<10)-1));
+				^ ((addr2) & ((1<<TABLE_BITS)-1));
 			u.index3 = 
 				  (history << (TABLE_BITS - HISTORY_LENGTH)) 
-				^ ((b.address>>20) & ((1<<10)-1));
+				^ ((addr3) & ((1<<TABLE_BITS)-1));
 			int FinalIndex = ((tab1[u.index1] >> 1) + (tab2[u.index2] >> 1) +(tab3[u.index3] >> 1));
 			u.direction_prediction ((FinalIndex > 1) ? 1 : 0);
 		} else {
