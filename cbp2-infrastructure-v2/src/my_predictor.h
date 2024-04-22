@@ -27,7 +27,7 @@ public:
 		if (b.br_flags & BR_CONDITIONAL) {
 			u.index = 
 				  (history << (TABLE_BITS - HISTORY_LENGTH)) 
-				^ (b.address);
+				^ (b.address & ((1<<TABLE_BITS)-1));
 			u.direction_prediction (tab[u.index] >> 1);
 		} else {
 			u.direction_prediction (true);
