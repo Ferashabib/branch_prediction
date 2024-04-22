@@ -13,8 +13,8 @@ public:
 
 class my_predictor : public branch_predictor {
 public:
-#define HISTORY_LENGTH	17
-#define TABLE_BITS	30
+#define HISTORY_LENGTH	18
+#define TABLE_BITS	18
 	my_update u;
 	branch_info bi;
 	unsigned int history;
