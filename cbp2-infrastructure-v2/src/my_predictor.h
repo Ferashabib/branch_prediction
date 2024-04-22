@@ -57,8 +57,8 @@ public:
 			u.index5 = 
 				  (history << (TABLE_BITS - HISTORY_LENGTH)) 
 				^ ((addr5) & ((1<<TABLE_BITS)-1));
-			int FinalIndex = (tab1[u.index1] >> 1) + (tab2[u.index2] >> 1) +(tab3[u.index3] >> 1) + (tab4[u.index4] >> 1) + (tab5[u.index5] >> 1);
-			u.direction_prediction ((FinalIndex > 2) ? 1 : 0);
+			int FinalIndex = (tab1[u.index1] >> 1) + (tab2[u.index2] >> 1) +(tab3[u.index3] >> 1); //+ (tab4[u.index4] >> 1) + (tab5[u.index5] >> 1);
+			u.direction_prediction ((FinalIndex > 1) ? 0 : 1);
 		} else {
 			u.direction_prediction (true);
 		}
