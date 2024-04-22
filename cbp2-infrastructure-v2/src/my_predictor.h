@@ -38,10 +38,10 @@ public:
 				^ (b.address & ((1<<TABLE_BITS)-1));
 			u.index2 = 
 				  (history << (TABLE_BITS - HISTORY_LENGTH)) 
-				^ ((addr2) & ((1<<TABLE_BITS)-1));
+				^ ((b.address >> 10) & ((1<<TABLE_BITS)-1));
 			u.index3 = 
 				  (history << (TABLE_BITS - HISTORY_LENGTH)) 
-				^ ((addr3) & ((1<<TABLE_BITS)-1));
+				^ ((b.address >> 20) & ((1<<TABLE_BITS)-1));
 			int FinalIndex = ((tab1[u.index1] >> 1) + (tab2[u.index2] >> 1) +(tab3[u.index3] >> 1));
 			u.direction_prediction ((FinalIndex > 1) ? 1 : 0);
 		} else {
