@@ -74,17 +74,27 @@ public:
 			unsigned char *c4 = &tab4[((my_update*)u)->index4];
 			unsigned char *c5 = &tab5[((my_update*)u)->index5];
 			if (taken) {
-				if (*c1 < 3) (*c1)++;
-				if (*c2 < 3) (*c2)++;
-				if (*c3 < 3) (*c3)++;
-				if (*c4 < 3) (*c4)++;
-				if (*c5 < 3) (*c5)++;
+				if (*c1 == 1) (*c1)=3;
+				else if (*c1 < 3) (*c1)++;
+				if (*c2 == 1) (*c2)=3;
+				else if (*c2 < 3) (*c2)++;
+				if (*c3 == 1) (*c3)=3;
+				else if (*c3 < 3) (*c3)++;
+				if (*c4 == 1) (*c4)=3;
+				else if (*c4 < 3) (*c4)++;
+				if (*c5 == 1) (*c5)=3;
+				else if (*c5 < 3) (*c5)++;
 			} else {
-				if (*c1 > 0) (*c1)--;
-				if (*c2 > 0) (*c2)--;
-				if (*c3 > 0) (*c3)--;
-				if (*c4 > 0) (*c4)--;
-				if (*c5 > 0) (*c5)--;
+				if (*c1 == 2) (*c1)=0;
+				else if (*c1 > 0) (*c1)--;
+				if (*c2 == 2) (*c2)=0;
+				else if (*c2 > 0) (*c2)--;
+				if (*c3 == 2) (*c3)=0;
+				else if (*c3 > 0) (*c3)--;
+				if (*c4 == 2) (*c4)=0;
+				else if (*c4 > 0) (*c4)--;
+				if (*c5 == 2) (*c5)=0;
+				else if (*c5 > 0) (*c5)--;
 			}
 			history <<= 1;
 			history |= taken;
