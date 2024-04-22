@@ -11,8 +11,8 @@ public:
 
 class my_predictor : public branch_predictor {
 public:
-#define HISTORY_LENGTH	15
-#define TABLE_BITS	15
+#define HISTORY_LENGTH	18
+#define TABLE_BITS	18
 	my_update u;
 	branch_info bi;
 	unsigned int history;
@@ -40,7 +40,7 @@ public:
 		if (bi.br_flags & BR_CONDITIONAL) {
 			unsigned char *c = &tab[((my_update*)u)->index];
 			if (taken) {
-				if (*c < 3) (*c)++;
+				if (*c < 7) (*c)++;
 			} else {
 				if (*c > 0) (*c)--;
 			}
